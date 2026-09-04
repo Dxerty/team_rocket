@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<!--
+Configuration météo réaliste DayZ
+Cycle serveur :
+serverTimeAcceleration: 3
+serverNightTimeAcceleration: 3
+
+Objectif :
+- Soleil + ciel couvert
+- Averses progressives courtes
+- Vent naturel variable
+- Orages rares
+-->
+
+<weather reset="0" enable="1">
+
+```
+<overcast>
+    <!--
+    Couverture nuageuse :
+    0.0 = ciel clair
+    1.0 = totalement couvert
+
+    Maintien assez long pour suivre le cycle jour/nuit accéléré
+    -->
+    <current actual="0.35" time="1800" duration="2400" />
+
+    <limits min="0.15" max="0.85" />
+
+    <!-- Changements lents des conditions nuageuses -->
+    <timelimits min="3600" max="7200" />
+
+    <!-- Variation progressive -->
+    <changelimits min="0.05" max="0.25" />
+</overcast>
+
+
+<fog>
+    <!--
+    Brouillard léger :
+    surtout après pluie et durant les périodes fraîches
+    -->
+    <current actual="0.04" time="900" duration="1200" />
+
+    <limits min="0.01" max="0.20" />
+
+    <timelimits min="1200" max="2400" />
+
+    <changelimits min="0.0" max="0.15" />
+</fog>
+
+
+<rain>
+    <!--
+    Pluie :
+    - apparition progressive
+    - durée moyenne d'une averse : environ 5 minutes
+    -->
+    <current actual="0.0" time="300" duration="300" />
+
+    <limits min="0.0" max="0.45" />
+
+    <!--
+    Environ une fenêtre pluvieuse toutes les 2 heures de jeu
+    -->
+    <timelimits min="7200" max="7200" />
+
+    <!-- Montée et baisse naturelles -->
+    <changelimits min="0.05" max="0.20" />
+
+    <!--
+    La pluie demande un ciel suffisamment chargé
+    mais laisse possible une pluie sous éclaircies
+    -->
+    <thresholds min="0.55" max="0.85" end="300" />
+</rain>
+
+
+<windMagnitude>
+    <!--
+    Vent :
+    0 = calme
+    12 = fort vent
+
+    Evolution de faible à fort
+    -->
+    <current actual="2.5" time="120" duration="300" />
+
+    <limits min="0.5" max="12.0" />
+
+    <!-- Changements espacés -->
+    <timelimits min="1800" max="3600" />
+
+    <!-- Rafales progressives -->
+    <changelimits min="0.5" max="3.0" />
+</windMagnitude>
+
+
+<windDirection>
+    <!--
+    Direction naturelle du vent
+    -3.14 = -180°
+    +3.14 = +180°
+    -->
+    <current actual="0.0" time="120" duration="300" />
+
+    <limits min="-3.14" max="3.14" />
+
+    <!-- Rotation lente -->
+    <timelimits min="300" max="900" />
+
+    <!-- Changements réalistes -->
+    <changelimits min="-0.8" max="0.8" />
+</windDirection>
+
+
+<!--
+Orages :
+rares, uniquement avec gros systèmes nuageux
+-->
+<storm density="0.15" threshold="0.75" timeout="900" />
+```
+
+</weather>

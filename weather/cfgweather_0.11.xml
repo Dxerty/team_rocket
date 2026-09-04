@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<!--
+Configuration météo réaliste DayZ
+
+Cycle serveur :
+serverTimeAcceleration: 3
+serverNightTimeAcceleration: 3
+
+Objectifs :
+- Journées lumineuses avec alternance soleil / nuages
+- Couverture nuageuse suffisamment importante pour assombrir les nuits
+- Nuits naturellement sombres sans brouillard excessif
+- Averses courtes et progressives
+- Pas d'augmentation excessive de la pluie
+- Vent naturel et variable
+- Orages plus fréquents mais encore relativement rares
+-->
+
+<weather reset="0" enable="1">
+
+
+<overcast>
+    <!--
+    Couverture nuageuse :
+    0.0 = ciel parfaitement clair
+    1.0 = ciel totalement couvert
+
+    Minimum abaissé pour conserver des journées avec de belles éclaircies.
+    Maximum élevé pour permettre des nuits très couvertes et sombres.
+    -->
+
+    <current actual="0.45" time="1800" duration="2400" />
+
+    <limits min="0.20" max="0.95" />
+
+    <!--
+    Évolution lente afin d'éviter les changements
+    brusques de luminosité.
+    -->
+
+    <timelimits min="3600" max="7200" />
+
+    <!--
+    Variations progressives de la couverture nuageuse.
+    -->
+
+    <changelimits min="0.05" max="0.20" />
+</overcast>
+
+
+<fog>
+    <!--
+    Brouillard léger.
+    Principalement présent après les périodes humides
+    ou pendant les périodes fraîches.
+
+    Évite de rendre les nuits constamment brumeuses.
+    -->
+
+    <current actual="0.03" time="900" duration="1200" />
+
+    <limits min="0.01" max="0.15" />
+
+    <timelimits min="1800" max="3600" />
+
+    <changelimits min="0.0" max="0.10" />
+</fog>
+
+
+<rain>
+    <!--
+    Pluie :
+    - averses courtes
+    - montée progressive
+    - intensité maximale modérée
+    - fréquence conservée
+    -->
+
+    <current actual="0.0" time="300" duration="300" />
+
+    <limits min="0.0" max="0.45" />
+
+    <!--
+    Environ une fenêtre pluvieuse toutes les 2 heures
+    de jeu.
+    -->
+
+    <timelimits min="7200" max="7200" />
+
+    <!--
+    Montée et diminution progressives.
+    -->
+
+    <changelimits min="0.05" max="0.20" />
+
+    <!--
+    La pluie apparaît principalement lorsque
+    la couverture nuageuse devient importante.
+    -->
+
+    <thresholds min="0.55" max="0.85" end="300" />
+</rain>
+
+
+<windMagnitude>
+    <!--
+    Vent :
+    0 = calme
+    12 = vent très fort
+
+    Vent généralement faible à modéré,
+    avec des renforcements occasionnels.
+    -->
+
+    <current actual="2.5" time="120" duration="300" />
+
+    <limits min="0.5" max="10.0" />
+
+    <!--
+    Changements assez lents pour conserver
+    une sensation de vent naturel.
+    -->
+
+    <timelimits min="1800" max="3600" />
+
+    <!--
+    Variations progressives.
+    -->
+
+    <changelimits min="0.5" max="2.5" />
+</windMagnitude>
+
+
+<windDirection>
+    <!--
+    Direction du vent :
+    -3.14 = -180°
+    +3.14 = +180°
+    -->
+
+    <current actual="0.0" time="120" duration="300" />
+
+    <limits min="-3.14" max="3.14" />
+
+    <!--
+    Rotation lente de la direction.
+    -->
+
+    <timelimits min="300" max="900" />
+
+    <!--
+    Changements de direction modérés.
+    -->
+
+    <changelimits min="-0.8" max="0.8" />
+</windDirection>
+
+
+<!--
+Orages :
+- plus fréquents que dans la configuration originale
+- principalement associés aux fortes couvertures nuageuses
+- pas suffisamment fréquents pour transformer chaque pluie en orage
+
+density 0.30 = fréquence augmentée
+threshold 0.70 = nécessite un ciel fortement couvert
+timeout 900 = délai entre événements
+-->
+
+<storm density="0.30" threshold="0.70" timeout="900" />
+
+
+</weather>
